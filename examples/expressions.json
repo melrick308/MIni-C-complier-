@@ -1,0 +1,104 @@
+[
+  {
+    "title": "Precedence",
+    "expression": "a + b * c",
+    "variables": {
+      "a": 2,
+      "b": 3,
+      "c": 4
+    },
+    "category": "valid"
+  },
+  {
+    "title": "Parentheses override precedence",
+    "expression": "(a + b) * c",
+    "variables": {
+      "a": 2,
+      "b": 3,
+      "c": 4
+    },
+    "category": "valid"
+  },
+  {
+    "title": "Left associativity",
+    "expression": "10 - 4 - 3",
+    "variables": {},
+    "category": "valid"
+  },
+  {
+    "title": "Left associativity (division)",
+    "expression": "100 / 10 / 2",
+    "variables": {},
+    "category": "valid"
+  },
+  {
+    "title": "Variables (symbol table)",
+    "expression": "a + b * (c - 2)",
+    "variables": {
+      "a": 3,
+      "b": 4,
+      "c": 7
+    },
+    "category": "valid"
+  },
+  {
+    "title": "Two subexpressions",
+    "expression": "(a + b) * (c - d)",
+    "variables": {},
+    "category": "valid"
+  },
+  {
+    "title": "Numbers",
+    "expression": "(10 + 5) * 2",
+    "variables": {},
+    "category": "valid"
+  },
+  {
+    "title": "Decimals",
+    "expression": "3.14 * 2",
+    "variables": {},
+    "category": "valid"
+  },
+  {
+    "title": "Missing operand",
+    "expression": "a + * b",
+    "variables": {},
+    "category": "syntax"
+  },
+  {
+    "title": "Missing ')'",
+    "expression": "(a + b",
+    "variables": {},
+    "category": "syntax"
+  },
+  {
+    "title": "Unmatched ')'",
+    "expression": "a + b)",
+    "variables": {},
+    "category": "syntax"
+  },
+  {
+    "title": "Missing operator",
+    "expression": "2(3)",
+    "variables": {},
+    "category": "syntax"
+  },
+  {
+    "title": "Unary minus",
+    "expression": "-5 + 2",
+    "variables": {},
+    "category": "syntax"
+  },
+  {
+    "title": "Invalid character",
+    "expression": "a + @ + b",
+    "variables": {},
+    "category": "lexical"
+  },
+  {
+    "title": "Division by zero",
+    "expression": "8 / (4 - 4)",
+    "variables": {},
+    "category": "runtime"
+  }
+]
