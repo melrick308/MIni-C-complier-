@@ -38,7 +38,13 @@ The MiniC language has:
 
 See [docs/language-spec.md](docs/language-spec.md).
 
-## Quick start (Windows PowerShell)
+## Quick start
+
+**Windows, one click:** double-click `start.bat`. It sets up the environment on first run, starts the server and
+opens the browser. Keep that window open while you use the app; closing it stops the server
+(the browser then shows `ERR_CONNECTION_REFUSED`).
+
+**Manual (PowerShell):**
 
 ```powershell
 python -m venv .venv
