@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MiniC Compiler Explorer</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%237c9cff'/><path d='M9 11l-4 5 4 5M23 11l4 5-4 5M18 8l-4 16' stroke='white' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="stylesheet" href="vendor/codemirror/codemirror.min.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7"/><path d="M9 11l-4 5 4 5M23 11l4 5-4 5M18 8l-4 16"/></svg>
+      <div>
+        <div class="brand-name">MiniC Compiler Explorer</div>
+        <div class="brand-sub">Recursive descent compiler · every phase, visualised</div>
+      </div>
+    </div>
+    <div class="segmented" role="tablist" aria-label="Mode">
+      <button id="mode-program" class="seg active" data-mode="program" role="tab">Program</button>
+      <button id="mode-expression" class="seg" data-mode="expression" role="tab">Expression</button>
+    </div>
+    <div class="topbar-actions">
+      <label class="select-wrap" title="Load a sample">
+        <span class="sr-only">Sample</span>
+        <select id="examples"></select>
+      </label>
+      <label class="toggle" id="optimize-wrap" title="Run the optimizer before executing">
+        <input type="checkbox" id="optimize"> <span>Optimize</span>
+      </label>
+      <button id="compile" class="btn primary" title="Ctrl+Enter">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>
+        <span id="compile-label">Compile &amp; Run</span>
+      </button>
+      <button id="theme" class="btn icon" title="Toggle light/dark theme" aria-label="Toggle theme">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 6.5 6.5A5 5 0 0 1 8 1.5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <nav id="pipeline" class="pipeline" aria-label="Compiler phases"></nav>
+
+  <main class="workspace">
+    <section class="pane left">
+      <!-- Program mode -->
+      <div id="program-input" class="editor-wrap">
+        <div class="pane-head">
+          <span class="pane-title">Source</span>
+          <span id="cursor-pos" class="muted small"></span>
+        </div>
+        <div id="editor-host" class="editor-host"></div>
+      </div>
+      <!-- Expression mode -->
+      <div id="expression-input" class="expr-wrap" hidden>
+        <div class="pane-head"><span class="pane-title">Arithmetic expression</span></div>
+        <div class="expr-box">
+          <input id="expr" type="text" spellcheck="false" autocomplete="off"
+                 placeholder="e.g.  a + b * (c - 2)" aria-label="Expression">
+          <button id="expr-clear" class="btn ghost" title="Clear">Clear</button>
+        </div>
+        <div id="expr-status" class="expr-status"></div>
+        <div class="pane-head"><span class="pane-title">Variables (symbol table)</span>
+          <button id="var-add" class="btn ghost small">+ Add</button></div>
+        <div id="variables" class="variables"></div>
+        <p class="muted small pad">Grammar: E → T E' · E' → + T E' | − T E' | ε · T → F T' ·
+          T' → * F T' | / F T' | ε · F → ( E ) | id | num</p>
+      </div>
+      <div class="bottom">
+        <div class="tabs small-tabs" role="tablist">
+          <button class="tab active" data-bottom="output">Output</button>
+          <button class="tab" data-bottom="problems">Problems <span id="problem-count" class="badge"></span></button>
+        </div>
+        <div id="bottom-output" class="bottom-body console"></div>
+        <div id="bottom-problems" class="bottom-body" hidden></div>
+      </div>
+    </section>
+
+    <section class="pane right">
+      <div id="view-tabs" class="tabs" role="tablist"></div>
+      <div id="view" class="view"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="vendor/codemirror/codemirror.min.js"></script>
+  <script src="vendor/codemirror/simple.min.js"></script>
+  <script src="vendor/codemirror/active-line.min.js"></script>
+  <script src="vendor/codemirror/matchbrackets.min.js"></script>
+  <script src="vendor/codemirror/closebrackets.min.js"></script>
+  <script src="vendor/mermaid/mermaid.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
